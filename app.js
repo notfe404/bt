@@ -9,10 +9,7 @@ const app = express();
 const PORT = 3000;
 
 // Connect to MongoDB
-mongoose.connect('mongodb://127.0.0.1:27017/TreeShop', {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-}).then(() => {
+mongoose.connect('mongodb://127.0.0.1:27017/TreeShop').then(() => {
     console.log("Connected to MongoDB database: TreeShop");
 }).catch(err => {
     console.error("MongoDB connection error:", err);
