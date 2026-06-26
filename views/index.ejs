@@ -1,0 +1,70 @@
+<%- include('partials/header') %>
+
+<main class="container">
+    <div class="form-wrapper">
+        <h2 class="form-title">Tree Shop</h2>
+        <div class="form-content">
+            <div class="form-image-left">
+                <img src="https://via.placeholder.com/250x300?text=Tree+Shop+Image" alt="Tree Shop Orchids">
+            </div>
+            <div class="form-inputs-right">
+                <form action="/add" method="POST" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label for="treename">Tree Name</label>
+                        <input type="text" id="treename" name="treename" required placeholder="Phong lan">
+                    </div>
+                    <div class="form-group">
+                        <label for="description">Description</label>
+                        <textarea id="description" name="description" rows="3" required placeholder="Nhắc đến ý nghĩa của hoa phong lan..."></textarea>
+                    </div>
+                    <div class="form-group image-group">
+                        <label for="image">Image</label>
+                        <div class="file-input-wrapper">
+                            <input type="text" id="image_text" placeholder="D:\image\phonglan.png" readonly>
+                            <input type="file" id="image" name="image" onchange="document.getElementById('image_text').value = this.value">
+                            <button type="button" class="btn btn-browser" onclick="document.getElementById('image').click()">Browser</button>
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-add">Add</button>
+                        <button type="reset" class="btn btn-reset">Reset</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Image</th>
+                    <th>Description</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <% trees.forEach((tree, index) => { %>
+                <tr>
+                    <td><%= index + 1 %></td>
+                    <td><%= tree.treename %></td>
+                    <td>
+                        <% if(tree.image) { %>
+                            <img src="/uploads/<%= tree.image %>" alt="<%= tree.treename %>" class="tree-img">
+                        <% } %>
+                    </td>
+                    <td class="desc-cell"><%= tree.description %></td>
+                    <td class="action-cell">
+                        <span class="icon edit-icon">✎</span>
+                        <span class="icon delete-icon">🗑</span>
+                    </td>
+                </tr>
+                <% }) %>
+            </tbody>
+        </table>
+    </div>
+</main>
+
+<%- include('partials/footer') %>
